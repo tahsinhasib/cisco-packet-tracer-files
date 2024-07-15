@@ -1,0 +1,11 @@
+For each router, for 2nd one have to do 4 times
+
+DS(config-router)#router 
+rip
+ver 2
+network 172.168.0.0
+network 10.0.0.0
+no auto-summary
+exit
+
+
