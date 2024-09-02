@@ -1,0 +1,93 @@
+router
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa0/0
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#int fa0/0.10
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+	
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip add 192.168.10.3 255.255.255.0
+Router(config-subif)#exit
+Router(config)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa0/0.20
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.20, changed state to up
+
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip add 192.168.20.3 255.255.255.0
+Router(config-subif)#exit
+Router(config)#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+switch
+
+Switch>en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#name account
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#name sales
+Switch(config-vlan)#exit
+Switch(config)#int range fa0/1-2
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#exit
+Switch(config)#int range fa0/3-4
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#exit
+Switch(config)#
+Switch#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Switch#
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int fa0/5
+Switch(config-if)#switchport mode trunk
+
+Switch(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/5, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/5, changed state to up
+
+Switch(config-if)#switchport trunk allowed vlan all
+Switch(config-if)#exit
+Switch(config)#

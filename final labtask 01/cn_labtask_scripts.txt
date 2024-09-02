@@ -1,0 +1,111 @@
+switch
+
+Switch>en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#name hr
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#name account
+Switch(config-vlan)#exit
+Switch(config)#vlan 30
+Switch(config-vlan)#name admission
+Switch(config-vlan)#exit
+Switch(config)#vlan 40
+Switch(config-vlan)#name register
+Switch(config-vlan)#exit
+Switch(config)#int fa0/2
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 10
+Switch(config-if)#exit
+Switch(config)#int fa0/3
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 20
+Switch(config-if)#exit
+Switch(config)#int fa0/4
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 30
+Switch(config-if)#exit
+Switch(config)#int fa0/5
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 40
+Switch(config-if)#exit
+Switch(config)#
+Switch(config)#
+Switch(config)#int fa0/1
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+Switch(config-if)#switchport trunk allowed vlan all
+Switch(config-if)#exit
+Switch(config)#
+
+
+
+
+router
+
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa0/1
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#int fa0/0.10
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+	
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip add 172.16.10.1 255.255.255.224
+Router(config-subif)#exit
+Router(config)#
+
+
+Router(config-if)#int fa0/0.20
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+	
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip add 192.132.20.1 255.255.255.248
+Router(config-subif)#exit
+Router(config)#
+
+Router(config-if)#int fa0/0.30
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.30, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.30, changed state to up
+
+	
+Router(config-subif)#encapsulation dot1Q 30
+Router(config-subif)#ip add 10.9.8.1 255.255.240.0
+Router(config-subif)#exit
+Router(config)#
+
+Router(config-if)#int fa0/0.40
+Router(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.40, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.40, changed state to up
+
+	
+Router(config-subif)#encapsulation dot1Q 40
+Router(config-subif)#ip add 145.9.4.1 255.255.255.128
+Router(config-subif)#exit
+Router(config)#
